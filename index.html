@@ -5,34 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video</title>
     <script>
-        function atualizarPaginaAos15h() {
-          const agora = new Date();
-          const horaAtual = agora.getHours();
-          const minutoAtual = agora.getMinutes();
-    
-          // Verifica se já passou das 15h
-          if (horaAtual === 15) {
-            location.reload();
-          } else {
-            // Calcula o tempo restante para as 15h
-            const proximaAtualizacao = new Date();
-            proximaAtualizacao.setHours(15, 0, 0, 0);
-    
-            // Caso já tenha passado, adiciona 24h para o próximo dia
-            if (agora > proximaAtualizacao) {
-              proximaAtualizacao.setDate(proximaAtualizacao.getDate() + 1);
-            }
-    
-            const tempoRestante = proximaAtualizacao - agora;
-    
-            // Configura o recarregamento da página no momento exato
-            setTimeout(() => location.reload(), tempoRestante);
+      document.addEventListener("DOMContentLoaded", function () {
+          const targetHour = 15;
+          const targetMinute = 10;
+
+          function checkTime() {
+              const now = new Date();
+              if (now.getHours() === targetHour && now.getMinutes() === targetMinute) {
+                  if (!localStorage.getItem("pageRefreshed")) {
+                      localStorage.setItem("pageRefreshed", "true");
+                      location.reload();
+                  }
+              } else if (now.getMinutes() !== targetMinute) {
+                  // Reseta o estado se passar de 15h10
+                  localStorage.removeItem("pageRefreshed");
+              }
           }
-        }
-    
-        // Executa a função ao carregar a página
-        window.onload = atualizarPaginaAos15h;
-      </script>
+
+          setInterval(checkTime, 1000); // Verifica a cada segundo
+      });
+  </script>
 </head>
 <body>
     <video id="meuVideo" controls width="100%" autoplay muted loop>
