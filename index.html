@@ -5,27 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video</title>
-  <script>
-    function verificarHora() {
-        const targetHour = 15;
-        const targetMinute = 35;
-        const targetSecond = 10;
-
-        // Função interna que verifica o horário a cada segundo
-        const intervalId = setInterval(() => {
-            const now = new Date();
-
-            if (
-                now.getHours() === targetHour &&
-                now.getMinutes() === targetMinute &&
-                now.getSeconds() === targetSecond
-            ) {
-                location.reload(); // Atualiza a página
-                clearInterval(intervalId); // Para o intervalo
-            }
-        }, 1000); // Verifica a cada 1 segundo
-    }
-</script>
 </head>
 
 <body onload="verificarHora()">
