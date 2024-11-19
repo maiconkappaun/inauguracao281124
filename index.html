@@ -6,11 +6,27 @@
     <title>Document</title>
 </head>
 <body>
-    <video controls width="100%" autoplay muted>
+    <video id="meuVideo" controls width="100%" autoplay muted loop>
         <source src="video/Relacionamento próximo, confiança e simplicidade, na Cresol é assim! 🧡.mp4"" type="video/mp4" />
         <!-- <source src="video/video.webm" type="video/webm" /> -->
         Seu navegador não suporta o elemento <code>video</code>.
     </video>
+
+    <script>
+        const video = document.getElementById('meuVideo');
+
+        // Aguarde o carregamento do vídeo e tente iniciar em tela cheia
+        video.addEventListener('loadeddata', () => {
+            video.play();
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) { // Para navegadores baseados em WebKit
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) { // Para navegadores baseados no Edge antigo
+                video.msRequestFullscreen();
+            }
+        });
+    </script>
     
 </body>
 </html>
