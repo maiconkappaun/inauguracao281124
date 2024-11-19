@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video</title>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const targetHour = 15;
-          const targetMinute = 16;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video</title>
+  <script>
+    function verificarHora() {
+        const targetHour = 15;
+        const targetMinute = 28;
+        const targetSecond = 10;
 
-          // Função para verificar o horário atual
-          function checkTime() {
-              while (true) {
-                  const now = new Date();
-                  if (now.getHours() === targetHour && now.getMinutes() === targetMinute) {
-                      location.reload();
-                      break; // Sai do loop após recarregar
-                  }
-              }
-          }
+        // Função interna que verifica o horário a cada segundo
+        const intervalId = setInterval(() => {
+            const now = new Date();
 
-          // Executa a verificação
-          checkTime();
-      });
-  </script>
+            if (
+                now.getHours() === targetHour &&
+                now.getMinutes() === targetMinute &&
+                now.getSeconds() === targetSecond
+            ) {
+                location.reload(); // Atualiza a página
+                clearInterval(intervalId); // Para o intervalo
+            }
+        }, 1000); // Verifica a cada 1 segundo
+    }
+</script>
 </head>
-<body>
-    <video id="meuVideo" controls width="100%" autoplay muted loop>
-        <source src="video/Relacionamento próximo, confiança e simplicidade, na Cresol é assim! 🧡.mp4" type="video/mp4" />
-    </video>
+
+<body onload="verificarHora()">
+  <video id="meuVideo" controls width="100%" autoplay muted loop>
+    <source src="video/Relacionamento próximo, confiança e simplicidade, na Cresol é assim! 🧡.mp4" type="video/mp4" />
+  </video>
 </body>
+
 </html>
